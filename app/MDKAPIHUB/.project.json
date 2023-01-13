@@ -1,0 +1,62 @@
+{
+	"Credential": "cf",
+	"CF": {
+		"Target": "",
+		"Organization": "",
+		"Space": "",
+		"Deploy": {
+			"Description": "My SAP application",
+			"WebClient": {
+				"Runtime": "preview",
+				"URL": ""
+			},
+			"Destination": [
+				{
+					"CF": "ExternalCUD-app-srv",
+					"MDK": "../service/ExternalCUD/",
+					"URL": ""
+				}
+			]
+		}
+	},
+	"MobileService": {
+		"Type": "standard",
+		"AdminAPI": "",
+		"AppId": "lcap.ExternalCUD.MDKAPIHUB",
+		"Destination": []
+	},
+	"Onboarding": {
+		"Schema": "sapmobilesvcs",
+		"TimeZone": "UTC",
+		"URL": ""
+	},
+	"LCAP": {
+		"FullName": "ExternalCUD_MDKAPIHUB",
+		"Service": [
+			{
+				"mdk": "MDKAPIHUB/Services/service1.service",
+				"cap": {
+					"name": "ExternalCUDService",
+					"sourcePath": "srv/service.cds",
+					"path": "/service/ExternalCUD/",
+					"entryPath": "/service/ExternalCUD",
+					"destination": "ExternalCUD-app-srv",
+					"value": "0"
+				},
+				"links": [
+					{
+						"entity": "ExternalCUDService.Contacts",
+						"files": [
+							"MDKAPIHUB/Pages/Contacts/Contacts_Detail.page",
+							"MDKAPIHUB/Pages/Contacts/Contacts_List.page"
+						]
+					}
+				]
+			}
+		],
+		"sourceTemplate": {
+			"id": "html5moduletemplates.basicSAPUI5ApplicationProjectModule",
+			"version": "1.40.12"
+		}
+	}
+}
