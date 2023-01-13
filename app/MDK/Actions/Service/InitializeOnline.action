@@ -1,0 +1,10 @@
+{
+    "Service": "/MDK/Services/service1.service",
+    "_Type": "Action.Type.ODataService.Initialize",
+    "ShowActivityIndicator": true,
+    "OnSuccess": "/MDK/Actions/Service/InitializeOnlineSuccessMessage.action",
+    "OnFailure": "/MDK/Actions/Service/InitializeOnlineFailureMessage.action",
+    "ActionResult": {
+        "_Name": "init"
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "_Type": "Action.Type.ODataService.UpdateEntity",
+    "Target": {
+        "EntitySet": "TravelagencyCollection",
+        "Service": "/MDK/Services/service1.service",
+        "ReadLink": "{@odata.readLink}"
+    },
+    "Properties": {
+        "agencynum": "#Control:agencynum/#Value",
+        "NAME": "#Control:NAME/#Value",
+        "STREET": "#Control:STREET/#Value",
+        "POSTBOX": "#Control:POSTBOX/#Value",
+        "POSTCODE": "#Control:POSTCODE/#Value",
+        "CITY": "#Control:CITY/#Value",
+        "COUNTRY": "#Control:COUNTRY/#Value",
+        "REGION": "#Control:REGION/#Value",
+        "TELEPHONE": "#Control:TELEPHONE/#Value",
+        "URL": "#Control:URL/#Value",
+        "LANGU": "#Control:LANGU/#Value",
+        "CURRENCY": "#Control:CURRENCY/#Value",
+        "mimeType": "#Control:mimeType/#Value"
+    },
+    "UpdateLinks": [],
+    "ActionResult": {
+        "_Name": "update"
+    },
+    "OnSuccess": "/MDK/Actions/UpdateEntitySuccessMessage.action",
+    "OnFailure": "/MDK/Actions/UpdateEntityFailureMessage.action"
+}

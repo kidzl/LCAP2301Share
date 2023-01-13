@@ -1,0 +1,83 @@
+{
+	"Caption": "TravelagencyCollection",
+	"ActionBar": {
+		"Items": [
+			{
+				"OnPress": "/MDK/Actions/TravelagencyCollection/NavToTravelagencyCollection_Create.action",
+				"Position": "Right",
+				"SystemItem": "Add"
+			}
+		]
+	},
+	"Controls": [
+		{
+			"Sections": [
+				{
+					"Header": {
+						"UseTopPadding": false
+					},
+					"ObjectCell": {
+						"AccessoryType": "disclosureIndicator",
+						"Description": "{STREET}",
+						"AvatarStack": {
+							"Avatars": [
+								{
+									"Image": ""
+								}
+							],
+							"ImageIsCircular": false
+						},
+						"Icons": [],
+						"OnPress": "/MDK/Actions/TravelagencyCollection/NavToTravelagencyCollection_Detail.action",
+						"StatusImage": "",
+						"Title": "{NAME}",
+						"Footnote": "{POSTBOX}",
+						"PreserveIconStackSpacing": false,
+						"StatusText": "{POSTCODE}",
+						"Subhead": "{agencynum}",
+						"SubstatusText": "{CITY}"
+					},
+					"EmptySection": {
+						"Caption": "No record found!"
+					},
+					"Search": {
+						"Enabled": true,
+						"Placeholder": "Item Search",
+						"BarcodeScanner": true,
+						"Delay": 500,
+						"MinimumCharacterThreshold": 3
+					},
+					"DataPaging": {
+						"ShowLoadingIndicator": true,
+						"LoadingIndicatorText": "Loading more items, please wait..."
+					},
+					"Target": {
+						"EntitySet": "TravelagencyCollection",
+						"Service": "/MDK/Services/service1.service",
+						"QueryOptions": ""
+					},
+					"_Type": "Section.Type.ObjectTable"
+				}
+			],
+			"LoadingIndicator": {
+				"Enabled": true,
+				"Text": "Loading, please wait..."
+			},
+			"_Type": "Control.Type.SectionedTable",
+			"_Name": "SectionedTable"
+		}
+	],
+	"_Type": "Page",
+	"ToolBar": {
+		"Items": [
+			{
+				"_Name": "LogoutToolbarItem",
+				"_Type": "Control.Type.ToolbarItem",
+				"Caption": "Logout",
+				"OnPress": "/MDK/Actions/Logout.action"
+			}
+		]
+	},
+	"_Name": "TravelagencyCollection_List",
+	"PrefersLargeCaption": true
+}

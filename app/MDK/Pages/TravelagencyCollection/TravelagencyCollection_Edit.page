@@ -1,0 +1,116 @@
+{
+	"Caption": "Update TravelagencyCollection Detail",
+	"DesignTimeTarget": {
+		"Service": "/MDK/Services/service1.service",
+		"EntitySet": "TravelagencyCollection",
+		"QueryOptions": ""
+	},
+	"ActionBar": {
+		"Items": [
+			{
+				"Position": "Left",
+				"Caption": "Cancel",
+				"OnPress": "/MDK/Rules/TravelagencyCollection/TravelagencyCollection_Cancel.js"
+			},
+			{
+				"Position": "Right",
+				"SystemItem": "Save",
+				"OnPress": "/MDK/Rules/TravelagencyCollection/TravelagencyCollection_UpdateEntity.js"
+			}
+		]
+	},
+	"Controls": [
+		{
+			"Sections": [
+				{
+					"Caption": "",
+					"Controls": [
+						{
+							"Caption": "agencynum",
+							"_Name": "agencynum",
+							"Value": "{agencynum}",
+							"_Type": "Control.Type.FormCell.SimpleProperty",
+							"IsEditable": false
+						},
+						{
+							"Caption": "NAME",
+							"_Name": "NAME",
+							"Value": "{NAME}",
+							"_Type": "Control.Type.FormCell.SimpleProperty"
+						},
+						{
+							"Caption": "STREET",
+							"_Name": "STREET",
+							"Value": "{STREET}",
+							"_Type": "Control.Type.FormCell.SimpleProperty"
+						},
+						{
+							"Caption": "POSTBOX",
+							"_Name": "POSTBOX",
+							"Value": "{POSTBOX}",
+							"_Type": "Control.Type.FormCell.SimpleProperty"
+						},
+						{
+							"Caption": "POSTCODE",
+							"_Name": "POSTCODE",
+							"Value": "{POSTCODE}",
+							"_Type": "Control.Type.FormCell.SimpleProperty"
+						},
+						{
+							"Caption": "CITY",
+							"_Name": "CITY",
+							"Value": "{CITY}",
+							"_Type": "Control.Type.FormCell.SimpleProperty"
+						},
+						{
+							"Caption": "COUNTRY",
+							"_Name": "COUNTRY",
+							"Value": "{COUNTRY}",
+							"_Type": "Control.Type.FormCell.SimpleProperty"
+						},
+						{
+							"Caption": "REGION",
+							"_Name": "REGION",
+							"Value": "{REGION}",
+							"_Type": "Control.Type.FormCell.SimpleProperty"
+						},
+						{
+							"Caption": "TELEPHONE",
+							"_Name": "TELEPHONE",
+							"Value": "{TELEPHONE}",
+							"_Type": "Control.Type.FormCell.SimpleProperty"
+						},
+						{
+							"Caption": "URL",
+							"_Name": "URL",
+							"Value": "{URL}",
+							"_Type": "Control.Type.FormCell.SimpleProperty"
+						},
+						{
+							"Caption": "LANGU",
+							"_Name": "LANGU",
+							"Value": "{LANGU}",
+							"_Type": "Control.Type.FormCell.SimpleProperty"
+						},
+						{
+							"Caption": "CURRENCY",
+							"_Name": "CURRENCY",
+							"Value": "{CURRENCY}",
+							"_Type": "Control.Type.FormCell.SimpleProperty"
+						},
+						{
+							"Caption": "mimeType",
+							"_Name": "mimeType",
+							"Value": "{mimeType}",
+							"_Type": "Control.Type.FormCell.SimpleProperty"
+						}
+					]
+				}
+			],
+			"_Name": "PageOneFormCell",
+			"_Type": "Control.Type.FormCellContainer"
+		}
+	],
+	"_Type": "Page",
+	"_Name": "TravelagencyCollection_Edit"
+}

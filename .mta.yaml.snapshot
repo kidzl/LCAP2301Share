@@ -1,0 +1,197 @@
+_schema-version: '3.1'
+ID: ExternalCUD
+version: 1.0.0
+description: A simple CAP project.
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - rm -rf build/ui-deployer
+        - mkdir -p build/ui-deployer
+        - rm -rf build/dist
+        - mkdir -p build/dist
+    - builder: custom
+      commands:
+        - npm install --production
+        - >-
+          bash -c "cds -v | grep 'cds-dk' || npm i --production --no-save
+          @sap/cds-dk @sap/mdk-tools"
+        - bash -c "export PATH=$PATH:$(pwd)/node_modules/.bin"
+        - cds build --production
+modules:
+  - name: ExternalCUD-MDK
+    type: html5
+    path: app/MDK
+    build-parameters:
+      builder: custom
+      commands:
+        - npx -p @sap/mdk-tools mdk build --target module --ui5 --forceUpdate
+        - bash -c "cd Web/MDKModule && rm -rf .npmrc && npm install"
+        - bash -c "cd Web/MDKModule && npm run build"
+        - >-
+          bash -c "mv Web/MDKModule/MDKModule-content.zip
+          ../../build/dist/MDK.zip"
+        - rm -rf Web/MDKModule/dist
+      _artifactName: MDK.zip
+      supported-platforms: []
+      build-result: ../../build/dist
+  - name: ExternalCUD-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm
+      ignore:
+        - node_modules
+        - package-lock.json
+    requires:
+      - name: ExternalCUD-service-uaa
+      - name: ExternalCUD-service-db
+  - name: ExternalCUD-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      memory: 256MB
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    build-parameters:
+      builder: npm
+      ignore:
+        - node_modules
+        - package-lock.json
+    requires:
+      - name: ExternalCUD-service-uaa
+      - name: ExternalCUD-service-db
+      - name: ExternalCUD-service-destination
+      - name: ExternalCUD-service-metadata
+      - name: ExternalCUD-service-connectivity
+      - name: ExternalCUD-service-logs
+  - name: ExternalCUD-aux-destinations
+    type: com.sap.application.content
+    parameters:
+      content:
+        subaccount:
+          existing_destinations_policy: update
+          destinations:
+            - Authentication: OAuth2UserTokenExchange
+              Name: ExternalCUD-service-uaa
+              ServiceInstanceName: ExternalCUD-uaa
+              ServiceKeyName: ExternalCUD-uaa-key
+              sap.cloud.service: lcap.ExternalCUD
+            - Authentication: OAuth2UserTokenExchange
+              Name: ExternalCUD-app-srv
+              TokenServiceInstanceName: ExternalCUD-uaa
+              TokenServiceKeyName: ExternalCUD-uaa-key
+              URL: ~{srv-api/srv-url}
+              sap.cloud.service: lcap.ExternalCUD
+            - Name: ExternalCUD-service-html5-apps-repo-host
+              ServiceInstanceName: ExternalCUD-html5-apps-repo-host
+              ServiceKeyName: ExternalCUD-html5-apps-repo-host-key
+              sap.cloud.service: lcap.ExternalCUD
+    build-parameters:
+      no-source: true
+    requires:
+      - name: ExternalCUD-service-uaa
+        parameters:
+          service-key:
+            name: ExternalCUD-uaa-key
+      - name: srv-api
+      - name: ExternalCUD-service-html5-apps-repo-host
+        parameters:
+          service-key:
+            name: ExternalCUD-html5-apps-repo-host-key
+      - name: ExternalCUD-service-destination
+        parameters:
+          content-target: true
+  - name: ExternalCUD-launchpad
+    type: html5
+    path: build/launchpad
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - >-
+          npx -p @ui5/cli ui5 build --dest dist
+          --include-task=generateManifestBundle
+          --include-task=generateCachebusterInfo
+        - bash -c "cd dist && npx bestzip ../../../build/dist/launchpad.zip *"
+        - rm -rf dist
+      _artifactName: launchpad.zip
+      supported-platforms: []
+      build-result: ../../build/dist
+  - name: ExternalCUD-aux-ui-deployer
+    type: com.sap.application.content
+    path: build/ui-deployer
+    build-parameters:
+      build-result: resources
+      requires:
+        - name: ExternalCUD-MDK
+          artifacts:
+            - MDK.zip
+          target-path: resources
+        - name: ExternalCUD-launchpad
+          artifacts:
+            - launchpad.zip
+          target-path: resources
+    requires:
+      - name: ExternalCUD-service-html5-apps-repo-host
+        parameters:
+          content-target: true
+resources:
+  - type: org.cloudfoundry.managed-service
+    name: ExternalCUD-service-uaa
+    parameters:
+      service: xsuaa
+      service-plan: application
+      service-name: ExternalCUD-uaa
+      path: xs-security.json
+      config:
+        xsappname: ExternalCUD-${space}
+        role-collections: []
+  - type: org.cloudfoundry.managed-service
+    name: ExternalCUD-service-db
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+      service-name: ExternalCUD-db
+  - type: org.cloudfoundry.managed-service
+    name: ExternalCUD-service-destination
+    parameters:
+      service: destination
+      service-plan: lite
+      service-name: ExternalCUD-destination
+      config:
+        HTML5Runtime_enabled: true
+        version: 1.0.0
+  - type: org.cloudfoundry.user-provided-service
+    name: ExternalCUD-service-metadata
+    parameters:
+      service: metadata
+      service-plan: standard
+      service-name: ExternalCUD-metadata
+      config:
+        default-domain: ${default-domain}
+  - type: org.cloudfoundry.managed-service
+    name: ExternalCUD-service-connectivity
+    parameters:
+      service: connectivity
+      service-plan: lite
+      service-name: ExternalCUD-connectivity
+  - type: org.cloudfoundry.managed-service
+    name: ExternalCUD-service-logs
+    parameters:
+      service: application-logs
+      service-plan: lite
+      service-name: ExternalCUD-logs
+  - type: org.cloudfoundry.managed-service
+    name: ExternalCUD-service-html5-apps-repo-host
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+      service-name: ExternalCUD-html5-apps-repo-host

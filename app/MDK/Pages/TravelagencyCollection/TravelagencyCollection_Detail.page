@@ -1,0 +1,112 @@
+{
+	"Caption": "TravelagencyCollection Detail",
+	"DesignTimeTarget": {
+		"Service": "/MDK/Services/service1.service",
+		"EntitySet": "TravelagencyCollection",
+		"QueryOptions": ""
+	},
+	"ActionBar": {
+		"Items": [
+			{
+				"OnPress": "/MDK/Rules/TravelagencyCollection/NavToTravelagencyCollection_Edit.js",
+				"Position": "Right",
+				"SystemItem": "Edit"
+			},
+			{
+				"OnPress": "/MDK/Rules/TravelagencyCollection/TravelagencyCollection_DeleteConfirmation.js",
+				"Position": "Right",
+				"SystemItem": "Trash"
+			}
+		]
+	},
+	"Controls": [
+		{
+			"Sections": [
+				{
+					"ObjectHeader": {
+						"Tags": [],
+						"DetailImage": "",
+						"HeadlineText": "{NAME}",
+						"Subhead": "{agencynum}",
+						"BodyText": "",
+						"Footnote": "{POSTBOX}",
+						"Description": "{STREET}",
+						"StatusText": "{POSTCODE}",
+						"StatusImage": "",
+						"SubstatusImage": "",
+						"SubstatusText": "{CITY}"
+					},
+					"_Type": "Section.Type.ObjectHeader"
+				},
+				{
+					"KeyAndValues": [
+						{
+							"KeyName": "agencynum",
+							"Value": "{agencynum}"
+						},
+						{
+							"KeyName": "NAME",
+							"Value": "{NAME}"
+						},
+						{
+							"KeyName": "STREET",
+							"Value": "{STREET}"
+						},
+						{
+							"KeyName": "POSTBOX",
+							"Value": "{POSTBOX}"
+						},
+						{
+							"KeyName": "POSTCODE",
+							"Value": "{POSTCODE}"
+						},
+						{
+							"KeyName": "CITY",
+							"Value": "{CITY}"
+						},
+						{
+							"KeyName": "COUNTRY",
+							"Value": "{COUNTRY}"
+						},
+						{
+							"KeyName": "REGION",
+							"Value": "{REGION}"
+						},
+						{
+							"KeyName": "TELEPHONE",
+							"Value": "{TELEPHONE}"
+						},
+						{
+							"KeyName": "URL",
+							"Value": "{URL}"
+						},
+						{
+							"KeyName": "LANGU",
+							"Value": "{LANGU}"
+						},
+						{
+							"KeyName": "CURRENCY",
+							"Value": "{CURRENCY}"
+						},
+						{
+							"KeyName": "mimeType",
+							"Value": "{mimeType}"
+						}
+					],
+					"Layout": {
+						"NumberOfColumns": 2
+					},
+					"MaxItemCount": 1,
+					"_Name": "SectionKeyValue0",
+					"_Type": "Section.Type.KeyValue"
+				}
+			],
+			"DataSubscriptions": [],
+			"_Type": "Control.Type.SectionedTable",
+			"_Name": "SectionedTable"
+		}
+	],
+	"_Type": "Page",
+	"_Name": "TravelagencyCollection_Detail",
+	"PrefersLargeCaption": true
+}

@@ -1,0 +1,3 @@
+destinations=[{"name":"ES5_E2EBJ_Flight","url":"https://ES5_E2EBJ_Flight.dest","proxyHost":"http://127.0.0.1","proxyPort":"8887"}]
+cds_requires={"ES5_E2EBJ_Flight":{"impl":"@sap/cds/libx/_runtime/remote/Service.js","external":true,"kind":"odata-v2","model":"srv/external/ES5_E2EBJ_Flight","credentials":{"destination":"ES5_E2EBJ_Flight"}}}
+VCAP_SERVICES={}

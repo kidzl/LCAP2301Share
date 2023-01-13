@@ -1,0 +1,6 @@
+{
+    "ModalPageFullscreen": false,
+    "ModalPage": true,
+    "PageToOpen": "/MDK/Pages/TravelagencyCollection/TravelagencyCollection_Edit.page",
+    "_Type": "Action.Type.Navigation"
+}

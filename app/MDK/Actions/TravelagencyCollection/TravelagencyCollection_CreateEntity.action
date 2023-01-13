@@ -1,0 +1,28 @@
+{
+    "CreateLinks": [],
+    "OnFailure": "/MDK/Actions/CreateEntityFailureMessage.action",
+    "OnSuccess": "/MDK/Actions/CreateEntitySuccessMessage.action",
+    "Properties": {
+        "agencynum": "#Control:agencynum/#Value",
+        "NAME": "#Control:NAME/#Value",
+        "STREET": "#Control:STREET/#Value",
+        "POSTBOX": "#Control:POSTBOX/#Value",
+        "POSTCODE": "#Control:POSTCODE/#Value",
+        "CITY": "#Control:CITY/#Value",
+        "COUNTRY": "#Control:COUNTRY/#Value",
+        "REGION": "#Control:REGION/#Value",
+        "TELEPHONE": "#Control:TELEPHONE/#Value",
+        "URL": "#Control:URL/#Value",
+        "LANGU": "#Control:LANGU/#Value",
+        "CURRENCY": "#Control:CURRENCY/#Value",
+        "mimeType": "#Control:mimeType/#Value"
+    },
+    "Target": {
+        "EntitySet": "TravelagencyCollection",
+        "Service": "/MDK/Services/service1.service"
+    },
+    "ActionResult": {
+        "_Name": "create"
+    },
+    "_Type": "Action.Type.ODataService.CreateEntity"
+}

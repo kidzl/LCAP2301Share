@@ -1,0 +1,66 @@
+{
+	"Credential": "cf",
+	"CF": {
+		"Target": "",
+		"Organization": "",
+		"Space": "",
+		"Deploy": {
+			"Description": "My SAP application",
+			"WebClient": {
+				"Runtime": "preview",
+				"URL": ""
+			},
+			"Destination": [
+				{
+					"CF": "ExternalCUD-app-srv",
+					"MDK": "../service/ExternalCUD/",
+					"URL": ""
+				}
+			]
+		}
+	},
+	"MobileService": {
+		"Type": "standard",
+		"AdminAPI": "",
+		"AppId": "lcap.ExternalCUD.MDK",
+		"Destination": []
+	},
+	"Onboarding": {
+		"Schema": "sapmobilesvcs",
+		"TimeZone": "UTC",
+		"URL": ""
+	},
+	"LCAP": {
+		"FullName": "ExternalCUD_MDK",
+		"Service": [
+			{
+				"mdk": "MDK/Services/service1.service",
+				"cap": {
+					"name": "ExternalCUDService",
+					"sourcePath": "srv/service.cds",
+					"path": "/service/ExternalCUD/",
+					"entryPath": "/service/ExternalCUD",
+					"destination": "ExternalCUD-app-srv",
+					"value": "0"
+				},
+				"links": [
+					{
+						"entity": "ExternalCUDService.TravelagencyCollection",
+						"files": [
+							"MDK/Pages/TravelagencyCollection/TravelagencyCollection_Detail.page",
+							"MDK/Pages/TravelagencyCollection/TravelagencyCollection_Edit.page",
+							"MDK/Pages/TravelagencyCollection/TravelagencyCollection_List.page",
+							"MDK/Actions/TravelagencyCollection/TravelagencyCollection_CreateEntity.action",
+							"MDK/Actions/TravelagencyCollection/TravelagencyCollection_DeleteEntity.action",
+							"MDK/Actions/TravelagencyCollection/TravelagencyCollection_UpdateEntity.action"
+						]
+					}
+				]
+			}
+		],
+		"sourceTemplate": {
+			"id": "html5moduletemplates.basicSAPUI5ApplicationProjectModule",
+			"version": "1.40.12"
+		}
+	}
+}
